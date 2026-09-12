@@ -156,7 +156,9 @@
             display: block;
         }
 
+        /* BOTÓN OCULTO POR DEFECTO */
         .btn-admin-access {
+            display: none;
             background: rgba(212, 175, 55, 0.12);
             color: var(--accent-gold);
             border: 1px solid var(--accent-gold);
@@ -166,9 +168,12 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .btn-admin-access.visible {
+            display: flex;
         }
 
         .btn-admin-access:hover {
@@ -653,7 +658,8 @@
                 <span class="brand-subtitle">Estructuras & Diseño Industrial</span>
             </div>
         </div>
-        <button class="btn-admin-access" onclick="toggleAdminModal()"><i class="fa-solid fa-sliders"></i> Panel Mi Web</button>
+        <!-- Botón oculto por defecto, se activa con F6 -->
+        <button id="adminBtn" class="btn-admin-access" onclick="toggleAdminModal()"><i class="fa-solid fa-sliders"></i> Panel Mi Web</button>
     </nav>
 
     <!-- HERO SECTION -->
@@ -704,7 +710,7 @@
     <!-- MODAL ADMIN PRIVADO -->
     <div id="adminModal" class="admin-modal">
         <div class="admin-content">
-            <button class="close-admin" onclick="toggleAdminModal()">&times;</button>
+            <button class="close-admin" onclick="closeAdminModal()">&times;</button>
             <h3><i class="fa-solid fa-gears"></i> Panel Administrador</h3>
 
             <div class="form-group" style="margin-bottom: 14px;">
@@ -820,9 +826,40 @@
             }
         }
 
+        /* CONTROL Y SEGURIDAD DEL PANEL ADMIN */
         function toggleAdminModal() {
-            document.getElementById('adminModal').classList.toggle('active');
+            const modal = document.getElementById('adminModal');
+            
+            if (modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                return;
+            }
+
+            // CONTRASEÑA SECRETA
+            const passwordCorrecta = "1234"; // Podés modificar esta clave
+
+            const inputPassword = prompt("Ingresá la clave de administrador para acceder:");
+
+            if (inputPassword === passwordCorrecta) {
+                modal.classList.add('active');
+            } else if (inputPassword !== null) {
+                alert("Contraseña incorrecta. Acceso denegado.");
+            }
         }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.remove('active');
+        }
+
+        // ATAJO TECLA F6 PARA REVELAR/ABRIR EL PANEL
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F6') {
+                e.preventDefault();
+                const btn = document.getElementById('adminBtn');
+                btn.classList.toggle('visible');
+                toggleAdminModal();
+            }
+        });
 
         function filterCategory(cat) {
             currentFilter = cat;
@@ -860,7 +897,7 @@
                 localStorage.setItem('hmdp_products', JSON.stringify(products));
 
                 document.getElementById('productForm').reset();
-                toggleAdminModal();
+                closeAdminModal();
                 loadProducts();
             };
 
