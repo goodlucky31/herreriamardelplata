@@ -12,6 +12,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- META PIXEL CODE -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Inicialización dinámica según ID guardado en panel
+        const savedMetaPixelId = localStorage.getItem('hmdp_meta_pixel_id') || 'TU_PIXEL_ID_AQUI';
+        if (savedMetaPixelId !== 'TU_PIXEL_ID_AQUI') {
+            fbq('init', savedMetaPixelId);
+            fbq('track', 'PageView');
+        }
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_PIXEL_ID_AQUI&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- END META PIXEL CODE -->
+
     <style>
         :root {
             --bg-body: #0a0c0f;
@@ -223,7 +247,7 @@
             color: var(--accent-gold);
         }
 
-        /* CATEGORÍAS - BARRA NAVEGACIÓN */
+        /* CATEGORÍAS */
         .categories-nav-wrapper {
             background-color: #0d0f14;
             border-bottom: 1px solid var(--border-color);
@@ -269,7 +293,7 @@
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
         }
 
-        /* MAIN GRID DE CATALOGO */
+        /* CATALOGO GRID */
         .main-container {
             max-width: 1150px;
             margin: 35px auto;
@@ -447,7 +471,7 @@
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
-        /* MODAL ADMIN PRIVADO */
+        /* MODAL ADMIN */
         .admin-modal {
             display: none;
             position: fixed;
@@ -622,7 +646,6 @@
     <nav>
         <div class="brand-container">
             <div class="brand-logo-wrapper">
-                <!-- LOGO OFICIAL DE HERRERÍA MAR DEL PLATA -->
                 <img src="assets/img/logo-herreria.jpg" id="navLogo" class="brand-logo" alt="Herrería Mar del Plata Logo">
             </div>
             <div>
@@ -669,7 +692,7 @@
     </div>
 
     <!-- BOTÓN WHATSAPP -->
-    <a href="#" id="floatWaBtn" target="_blank" class="whatsapp-float">
+    <a href="#" id="floatWaBtn" target="_blank" onclick="trackLeadEvent('Boton_Flotante_WA', 0)" class="whatsapp-float">
         <i class="fa-brands fa-whatsapp fa-xl"></i> Solicitar Presupuesto
     </a>
 
@@ -684,9 +707,14 @@
             <button class="close-admin" onclick="toggleAdminModal()">&times;</button>
             <h3><i class="fa-solid fa-gears"></i> Panel Administrador</h3>
 
-            <div class="form-group" style="margin-bottom: 20px;">
+            <div class="form-group" style="margin-bottom: 14px;">
                 <label>Tu Teléfono WhatsApp para Presupuestos (ej: 5492231234567):</label>
                 <input type="text" id="cfgPhone" placeholder="5492231234567">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label>ID del Pixel de Meta (Facebook Pixel):</label>
+                <input type="text" id="cfgMetaPixel" placeholder="Ej: 123456789012345">
             </div>
 
             <hr style="border-color: var(--border-color); margin: 20px 0;">
@@ -736,7 +764,8 @@
         let currentFilter = 'todas';
 
         const defaultConfig = {
-            phone: '5492231234567'
+            phone: '5492231234567',
+            metaPixelId: ''
         };
 
         function getConfig() {
@@ -751,6 +780,8 @@
         function applyConfig() {
             const cfg = getConfig();
             document.getElementById('cfgPhone').value = cfg.phone || '';
+            document.getElementById('cfgMetaPixel').value = cfg.metaPixelId || '';
+            
             const waMsg = encodeURIComponent("Hola Herrería Mar del Plata! Quisiera consultar por un presupuesto a medida.");
             document.getElementById('floatWaBtn').href = `https://wa.me/${cfg.phone}?text=${waMsg}`;
         }
@@ -760,6 +791,34 @@
             cfg.phone = this.value;
             saveConfig(cfg);
         });
+
+        document.getElementById('cfgMetaPixel').addEventListener('change', function() {
+            const cfg = getConfig();
+            cfg.metaPixelId = this.value;
+            localStorage.setItem('hmdp_meta_pixel_id', this.value);
+            saveConfig(cfg);
+        });
+
+        /* EVENTOS DEL PIXEL DE META */
+        function trackLeadEvent(productName, price) {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: productName,
+                    value: Number(price) || 0,
+                    currency: 'ARS'
+                });
+            }
+        }
+
+        function trackPurchaseEvent(productName, price) {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Purchase', {
+                    content_name: productName,
+                    value: Number(price),
+                    currency: 'ARS'
+                });
+            }
+        }
 
         function toggleAdminModal() {
             document.getElementById('adminModal').classList.toggle('active');
@@ -843,7 +902,7 @@
 
                 let mpBtnHtml = '';
                 if (p.mpLink) {
-                    mpBtnHtml = `<a href="${p.mpLink}" target="_blank" class="btn-mp"><i class="fa-solid fa-credit-card"></i> Pagar Seña / Comprar</a>`;
+                    mpBtnHtml = `<a href="${p.mpLink}" target="_blank" onclick="trackPurchaseEvent('${p.title.replace(/'/g, "\\'")}', ${p.price})" class="btn-mp"><i class="fa-solid fa-credit-card"></i> Pagar Seña / Comprar</a>`;
                 }
 
                 card.innerHTML = `
@@ -857,7 +916,7 @@
                         <div class="product-desc">${p.desc}</div>
                         <div class="product-buttons">
                             ${mpBtnHtml}
-                            <a href="${waUrl}" target="_blank" class="btn-wa"><i class="fa-brands fa-whatsapp"></i> Consultar Presupuesto</a>
+                            <a href="${waUrl}" target="_blank" onclick="trackLeadEvent('${p.title.replace(/'/g, "\\'")}', ${p.price})" class="btn-wa"><i class="fa-brands fa-whatsapp"></i> Consultar Presupuesto</a>
                         </div>
                         <button class="btn-delete-item" onclick="deleteProduct(${p.id})">🗑️ Eliminar Trabajo</button>
                     </div>
