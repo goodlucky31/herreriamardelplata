@@ -6,26 +6,35 @@
     <title>Herrería Mar del Plata | Estructuras & Diseño Industrial</title>
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #0b0d10;
-            --bg-card: #15181e;
-            --header-bg: #101318;
-            --accent-gold: #c59b27;
-            --accent-gold-hover: #e0b332;
+            --bg-body: #0a0c0f;
+            --bg-card: #14171d;
+            --header-bg: #0f1217;
+            --accent-gold: #d4af37;
+            --accent-gold-hover: #f3c63f;
             --accent-mp: #009ee3;
             --accent-wa: #25d366;
-            --text-light: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #232730;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #222732;
+            --card-shadow: 0 12px 30px rgba(0,0,0,0.4);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
             scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, .brand-title, .cat-btn {
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
@@ -35,36 +44,64 @@
             padding-bottom: 80px;
         }
 
+        /* TOP BAR CONTACTO */
+        .top-bar {
+            background-color: #07080a;
+            border-bottom: 1px solid var(--border-color);
+            padding: 6px 20px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-info {
+            display: flex;
+            gap: 18px;
+        }
+
+        .top-bar-info span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .top-bar-info i {
+            color: var(--accent-gold);
+        }
+
         /* NAVBAR */
         nav {
             background-color: var(--header-bg);
             border-bottom: 2px solid var(--accent-gold);
-            padding: 12px 20px;
+            padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.7);
         }
 
         .brand-container {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 15px;
         }
 
         .brand-logo-wrapper {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             border: 2px solid var(--accent-gold);
             overflow: hidden;
-            background: #fff;
+            background: #15181e;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
         }
 
         .brand-logo {
@@ -74,94 +111,31 @@
         }
 
         .brand-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 800;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: #fff;
+            line-height: 1.2;
         }
 
         .brand-subtitle {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--accent-gold);
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            font-weight: 600;
             display: block;
         }
 
         .btn-admin-access {
-            background: rgba(197, 155, 39, 0.15);
+            background: rgba(212, 175, 55, 0.12);
             color: var(--accent-gold);
             border: 1px solid var(--accent-gold);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-admin-access:hover {
-            background: var(--accent-gold);
-            color: #000;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(180deg, rgba(11,13,16,0.7) 0%, rgba(11,13,16,0.98) 100%),
-                        url('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80') center/cover;
-            padding: 50px 20px 35px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero h1 {
-            font-size: 1.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .hero h1 span {
-            color: var(--accent-gold);
-        }
-
-        .hero p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            max-width: 650px;
-            margin: 0 auto 20px auto;
-        }
-
-        /* CATEGORÍAS - NAVEGACIÓN Y FILTROS */
-        .categories-nav-wrapper {
-            background-color: #0e1014;
-            border-bottom: 1px solid var(--border-color);
-            padding: 15px 20px;
-            position: sticky;
-            top: 76px;
-            z-index: 900;
-        }
-
-        .categories-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-            scrollbar-width: thin;
-        }
-
-        .cat-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
             padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            white-space: nowrap;
+            font-size: 0.8rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -169,17 +143,157 @@
             gap: 8px;
         }
 
-        .cat-btn:hover, .cat-btn.active {
-            background-color: var(--accent-gold);
+        .btn-admin-access:hover {
+            background: var(--accent-gold);
             color: #000;
-            border-color: var(--accent-gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* MAIN CONTAINER & GRID */
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(180deg, rgba(10,12,15,0.75) 0%, rgba(10,12,15,0.98) 100%),
+                        url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1400&q=80') center/cover;
+            padding: 65px 20px 45px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--accent-gold);
+            background: linear-gradient(135deg, #f3c63f 0%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 25px auto;
+            font-weight: 400;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .hero-feature-item i {
+            color: var(--accent-gold);
+        }
+
+        /* CATEGORÍAS - BARRA NAVEGACIÓN */
+        .categories-nav-wrapper {
+            background-color: #0d0f14;
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 20px;
+            position: sticky;
+            top: 78px;
+            z-index: 900;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .categories-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+        }
+
+        .cat-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 9px 18px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            background: linear-gradient(135deg, #d4af37 0%, #b89228 100%);
+            color: #000;
+            border-color: var(--accent-gold);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* MAIN GRID DE CATALOGO */
         .main-container {
-            max-width: 1100px;
-            margin: 30px auto;
+            max-width: 1150px;
+            margin: 35px auto;
             padding: 0 20px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-gold);
         }
 
         .catalog-grid {
@@ -199,109 +313,134 @@
         .product-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-            border-color: #333a46;
+            transform: translateY(-6px);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
         }
 
         .product-img-wrapper {
             position: relative;
             width: 100%;
-            height: 220px;
-            background-color: #000;
+            height: 230px;
+            background-color: #07080a;
+            overflow: hidden;
         }
 
         .product-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
         }
 
         .product-badge {
             position: absolute;
             top: 12px;
             right: 12px;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(10, 12, 15, 0.88);
             color: var(--accent-gold);
             border: 1px solid var(--accent-gold);
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.7rem;
-            font-weight: bold;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 0.8px;
+            backdrop-filter: blur(4px);
         }
 
         .product-info {
-            padding: 18px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            font-weight: 700;
             color: #fff;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .product-price {
-            font-size: 1.35rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--accent-gold);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .product-desc {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             flex-grow: 1;
             white-space: pre-line;
+            line-height: 1.5;
         }
 
         .product-buttons {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-mp {
             background-color: var(--accent-mp);
             color: #fff;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.8rem;
+            padding: 11px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.82rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             text-transform: uppercase;
             text-decoration: none;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 158, 227, 0.25);
+        }
+
+        .btn-mp:hover {
+            background-color: #0088c6;
         }
 
         .btn-wa {
             background-color: transparent;
             color: var(--accent-wa);
             border: 1px solid var(--accent-wa);
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.8rem;
+            padding: 11px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.82rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             text-decoration: none;
             text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-wa:hover {
+            background-color: var(--accent-wa);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         /* MODAL ADMIN PRIVADO */
@@ -309,10 +448,11 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.88);
             z-index: 2000;
             overflow-y: auto;
             padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .admin-modal.active {
@@ -322,120 +462,184 @@
         }
 
         .admin-content {
-            background-color: #1a1e26;
+            background-color: #161920;
             border: 2px solid var(--accent-gold);
-            border-radius: 12px;
-            padding: 25px;
+            border-radius: 14px;
+            padding: 28px;
             width: 100%;
             max-width: 650px;
             position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
         }
 
         .close-admin {
             position: absolute;
-            top: 15px; right: 15px;
+            top: 18px; right: 20px;
             background: transparent;
             border: none;
             color: var(--text-muted);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-admin:hover {
+            color: #fff;
         }
 
         .admin-content h3 {
             color: var(--accent-gold);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            margin-bottom: 22px;
+            font-size: 1.25rem;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
+            gap: 14px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .form-group label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            font-weight: 600;
         }
 
         .form-group input, .form-group textarea, .form-group select {
-            padding: 10px;
-            background: var(--bg-body);
+            padding: 11px 14px;
+            background: #0f1116;
             border: 1px solid var(--border-color);
             color: #fff;
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--accent-gold);
         }
 
         .btn-save-settings {
-            background-color: var(--accent-gold);
+            background: linear-gradient(135deg, #d4af37 0%, #b89228 100%);
             color: #000;
             border: none;
-            padding: 12px;
-            font-weight: bold;
-            border-radius: 6px;
+            padding: 13px;
+            font-weight: 800;
+            border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save-settings:hover {
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
         }
 
         .btn-delete-item {
             background: transparent;
-            color: #ef4444;
+            color: #f87171;
             border: none;
             font-size: 0.8rem;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 12px;
             text-decoration: underline;
+            align-self: center;
         }
 
+        /* WHATSAPP FLOAT */
         .whatsapp-float {
             position: fixed;
-            bottom: 20px; right: 20px;
+            bottom: 24px; right: 24px;
             background-color: var(--accent-wa);
-            color: #fff;
+            color: #000;
             border-radius: 50px;
-            padding: 12px 22px;
+            padding: 13px 24px;
             display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 0.95rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
             z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #07080a;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 50px;
+        }
+
+        footer p span {
+            color: var(--accent-gold);
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
+    <!-- TOP BAR DE INFORMACIÓN -->
+    <div class="top-bar">
+        <div class="top-bar-info">
+            <span><i class="fa-solid fa-location-dot"></i> Mar del Plata, Buenos Aires</span>
+            <span><i class="fa-solid fa-clock"></i> Lun a Vie: 8:00 - 18:00 hs</span>
+        </div>
+        <div>
+            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Calidad Asegurada</span>
+        </div>
+    </div>
+
     <!-- NAVBAR -->
     <nav>
         <div class="brand-container">
             <div class="brand-logo-wrapper">
-                <img src="" id="navLogo" class="brand-logo" alt="Herrería Logo">
+                <!-- LOGO OFICIAL FIJO REALISTA -->
+                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=150&q=80" id="navLogo" class="brand-logo" alt="Herrería Mar del Plata Logo">
             </div>
             <div>
                 <span class="brand-title">Herrería Mar del Plata</span>
                 <span class="brand-subtitle">Estructuras & Diseño Industrial</span>
             </div>
         </div>
-        <button class="btn-admin-access" onclick="toggleAdminModal()"><i class="fa-solid fa-gear"></i> Panel Mi Web</button>
+        <button class="btn-admin-access" onclick="toggleAdminModal()"><i class="fa-solid fa-sliders"></i> Panel Mi Web</button>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero">
-        <h1>Catálogo de <span>Herrería Premium</span></h1>
-        <p>Estructuras, cierres y mobiliario a medida con pintura anticorrosiva de máxima resistencia.</p>
+        <span class="hero-badge"><i class="fa-solid fa-award"></i> Calidad Profesional en Mar del Plata</span>
+        <h1>Herrería de <span>Alta Gama</span></h1>
+        <p>Diseño, fabricación e instalación de estructuras metálicas, aberturas y mobiliario industrial a medida con acabado anticorrosivo de larga durabilidad.</p>
+        
+        <div class="hero-features">
+            <div class="hero-feature-item"><i class="fa-solid fa-circle-check"></i> Diseños Exclusivos</div>
+            <div class="hero-feature-item"><i class="fa-solid fa-circle-check"></i> Pintura Epoxi / Al Horno</div>
+            <div class="hero-feature-item"><i class="fa-solid fa-circle-check"></i> Envíos e Instalación Local</div>
+        </div>
     </section>
 
     <!-- BARRA DE CATEGORÍAS -->
@@ -454,37 +658,40 @@
 
     <!-- MAIN GRID DE PRODUCTOS -->
     <div class="main-container">
+        <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-cubes"></i> Catálogo de Trabajos</div>
+        </div>
         <div id="catalogGrid" class="catalog-grid"></div>
     </div>
 
     <!-- BOTÓN WHATSAPP -->
     <a href="#" id="floatWaBtn" target="_blank" class="whatsapp-float">
-        <i class="fa-brands fa-whatsapp fa-lg"></i> Consultar por WhatsApp
+        <i class="fa-brands fa-whatsapp fa-xl"></i> Solicitar Presupuesto
     </a>
 
-    <!-- MODAL ADMIN -->
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>Herrería Mar del Plata</span>. Todos los derechos reservados. Mar del Plata, Argentina.</p>
+    </footer>
+
+    <!-- MODAL ADMIN PRIVADO -->
     <div id="adminModal" class="admin-modal">
         <div class="admin-content">
             <button class="close-admin" onclick="toggleAdminModal()">&times;</button>
-            <h3><i class="fa-solid fa-sliders"></i> Panel Administrador</h3>
+            <h3><i class="fa-solid fa-gears"></i> Panel Administrador</h3>
 
             <div class="form-group" style="margin-bottom: 20px;">
-                <label>Tu Teléfono WhatsApp (ej: 5492231234567):</label>
+                <label>Tu Teléfono WhatsApp para Presupuestos (ej: 5492231234567):</label>
                 <input type="text" id="cfgPhone" placeholder="5492231234567">
-            </div>
-
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label>Logo de la Empresa (Subir archivo):</label>
-                <input type="file" id="cfgLogoInput" accept="image/*">
             </div>
 
             <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-            <h4 style="color: #fff; margin-bottom: 12px;">Cargar Nuevo Trabajo o Producto</h4>
+            <h4 style="color: #fff; margin-bottom: 14px; font-weight: 700;">Publicar Nuevo Trabajo en Catálogo</h4>
             <form id="productForm">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label>Categoría:</label>
+                        <label>Categoría del Producto:</label>
                         <select id="pCategory" required>
                             <option value="portones">Portones</option>
                             <option value="pergolas">Pérgolas</option>
@@ -500,23 +707,23 @@
                         <input type="text" id="pTitle" placeholder="Ej: Portón Levadizo Automatizado" required>
                     </div>
                     <div class="form-group">
-                        <label>Precio ($ ARS):</label>
+                        <label>Precio Estimado o Base ($ ARS):</label>
                         <input type="number" id="pPrice" placeholder="Ej: 450000" required>
                     </div>
                     <div class="form-group">
-                        <label>Link de Pago Mercado Pago (Opcional):</label>
+                        <label>Link de Pago / Seña Mercado Pago (Opcional):</label>
                         <input type="url" id="pMpLink" placeholder="https://mpago.la/...">
                     </div>
                     <div class="form-group">
-                        <label>Foto (Subir archivo de imagen):</label>
+                        <label>Foto de Referencia (Subir Imagen):</label>
                         <input type="file" id="pImgInput" accept="image/*" required>
                     </div>
                     <div class="form-group">
-                        <label>Descripción / Medidas / Materiales:</label>
-                        <textarea id="pDesc" rows="3" placeholder="Ej: Estructura en caño 80x40mm, pintura al horno y tratamiento anticorrosivo." required></textarea>
+                        <label>Descripción / Medidas / Detalle de Materiales:</label>
+                        <textarea id="pDesc" rows="3" placeholder="Ej: Estructura en caño estructural 80x40mm con pintura al horno anticorrosiva." required></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn-save-settings">🚀 Guardar y Publicar</button>
+                <button type="submit" class="btn-save-settings">🚀 Guardar y Publicar Trabajo</button>
             </form>
         </div>
     </div>
@@ -525,8 +732,7 @@
         let currentFilter = 'todas';
 
         const defaultConfig = {
-            phone: '5492231234567',
-            logo: 'https://via.placeholder.com/150/111/fff?text=HMP'
+            phone: '5492231234567'
         };
 
         function getConfig() {
@@ -541,30 +747,14 @@
         function applyConfig() {
             const cfg = getConfig();
             document.getElementById('cfgPhone').value = cfg.phone || '';
-            const waMsg = encodeURIComponent("Hola Herrería Mar del Plata! Quiero solicitar un presupuesto.");
+            const waMsg = encodeURIComponent("Hola Herrería Mar del Plata! Quisiera consultar por un presupuesto a medida.");
             document.getElementById('floatWaBtn').href = `https://wa.me/${cfg.phone}?text=${waMsg}`;
-            if (cfg.logo) {
-                document.getElementById('navLogo').src = cfg.logo;
-            }
         }
 
         document.getElementById('cfgPhone').addEventListener('change', function() {
             const cfg = getConfig();
             cfg.phone = this.value;
             saveConfig(cfg);
-        });
-
-        document.getElementById('cfgLogoInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(evt) {
-                    const cfg = getConfig();
-                    cfg.logo = evt.target.result;
-                    saveConfig(cfg);
-                };
-                reader.readAsDataURL(file);
-            }
         });
 
         function toggleAdminModal() {
@@ -617,7 +807,7 @@
         });
 
         function deleteProduct(id) {
-            if (confirm("¿Deseas borrar este producto del catálogo?")) {
+            if (confirm("¿Deseas eliminar este trabajo del catálogo público?")) {
                 let products = JSON.parse(localStorage.getItem('hmdp_products') || '[]');
                 products = products.filter(p => p.id !== id);
                 localStorage.setItem('hmdp_products', JSON.stringify(products));
@@ -636,7 +826,7 @@
             }
 
             if (products.length === 0) {
-                catalogGrid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 40px;">No hay trabajos publicados en esta categoría aún.</p>';
+                catalogGrid.innerHTML = '<div style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 60px 20px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color);"><i class="fa-solid fa-folder-open fa-2x" style="margin-bottom: 10px; color: var(--accent-gold);"></i><p>No hay trabajos publicados en esta categoría por el momento.</p></div>';
                 return;
             }
 
@@ -644,12 +834,12 @@
                 const card = document.createElement('div');
                 card.className = 'product-card';
 
-                const waMessage = encodeURIComponent(`Hola Herrería Mar del Plata! Me interesa consultar por: ${p.title} ($${p.price})`);
+                const waMessage = encodeURIComponent(`Hola Herrería Mar del Plata! Quisiera pedir un presupuesto por el siguiente modelo: ${p.title} ($${p.price})`);
                 const waUrl = `https://wa.me/${cfg.phone}?text=${waMessage}`;
 
                 let mpBtnHtml = '';
                 if (p.mpLink) {
-                    mpBtnHtml = `<a href="${p.mpLink}" target="_blank" class="btn-mp"><i class="fa-solid fa-credit-card"></i> Pagar con Mercado Pago</a>`;
+                    mpBtnHtml = `<a href="${p.mpLink}" target="_blank" class="btn-mp"><i class="fa-solid fa-credit-card"></i> Pagar Seña / Comprar</a>`;
                 }
 
                 card.innerHTML = `
@@ -663,9 +853,9 @@
                         <div class="product-desc">${p.desc}</div>
                         <div class="product-buttons">
                             ${mpBtnHtml}
-                            <a href="${waUrl}" target="_blank" class="btn-wa"><i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp</a>
+                            <a href="${waUrl}" target="_blank" class="btn-wa"><i class="fa-brands fa-whatsapp"></i> Consultar Presupuesto</a>
                         </div>
-                        <button class="btn-delete-item" onclick="deleteProduct(${p.id})">🗑️ Eliminar Producto</button>
+                        <button class="btn-delete-item" onclick="deleteProduct(${p.id})">🗑️ Eliminar Trabajo</button>
                     </div>
                 `;
                 catalogGrid.appendChild(card);
